@@ -12,9 +12,9 @@ namespace Board
         public int QttMoves { get; protected set; }
         public Board Board { get; set; }
 
-        public Piece(Position position, Color color, Board board)
+        public Piece(Color color, Board board)
         {
-            Position = position;
+            Position = null;
             Color = color;
             QttMoves = 0;
             Board = board;

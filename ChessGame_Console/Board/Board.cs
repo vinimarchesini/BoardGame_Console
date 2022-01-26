@@ -17,6 +17,11 @@ namespace Board
             pieces = new Piece[lines, collums];
         }
 
+        public void InputPiece(Piece piece, Position pos)
+        {
+            pieces[pos.Line, pos.Collum] = piece;
+            piece.Position = pos;
+        }
         public Piece Piece(int line, int collum)
         {
             return pieces[line, collum];
