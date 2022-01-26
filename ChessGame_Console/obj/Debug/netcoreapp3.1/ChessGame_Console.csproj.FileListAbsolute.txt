@@ -1,0 +1,14 @@
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\bin\Debug\netcoreapp3.1\ChessGame_Console.exe
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\bin\Debug\netcoreapp3.1\ChessGame_Console.deps.json
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\bin\Debug\netcoreapp3.1\ChessGame_Console.runtimeconfig.json
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\bin\Debug\netcoreapp3.1\ChessGame_Console.runtimeconfig.dev.json
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\bin\Debug\netcoreapp3.1\ChessGame_Console.dll
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\bin\Debug\netcoreapp3.1\ChessGame_Console.pdb
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\obj\Debug\netcoreapp3.1\ChessGame_Console.csproj.AssemblyReference.cache
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\obj\Debug\netcoreapp3.1\ChessGame_Console.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\obj\Debug\netcoreapp3.1\ChessGame_Console.AssemblyInfoInputs.cache
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\obj\Debug\netcoreapp3.1\ChessGame_Console.AssemblyInfo.cs
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\obj\Debug\netcoreapp3.1\ChessGame_Console.csproj.CoreCompileInputs.cache
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\obj\Debug\netcoreapp3.1\ChessGame_Console.dll
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\obj\Debug\netcoreapp3.1\ChessGame_Console.pdb
+C:\Users\Vinicius\source\repos\ChessGame_Console\ChessGame_Console\obj\Debug\netcoreapp3.1\ChessGame_Console.genruntimeconfig.cache
