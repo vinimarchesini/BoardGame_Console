@@ -9,14 +9,24 @@ namespace ChessGame_Console
     {
         static void Main(string[] args)
         {
-            ChessPosition cp = new ChessPosition('a', 1);
-            Console.WriteLine(cp);
-            Console.WriteLine(cp.ToPosition());
+            try
+            { 
+            ChessMatch chessMatch = new ChessMatch();
 
-            Board.Board b = new Board.Board(8, 8);
-            b.InputPiece(new King(b, Enum.Parse<Color>("White")), new Position(0, 0));
-            b.InputPiece(new Rook(b, Color.Black), new Position(3, 5));
-            Screen.PrintBoard(b);
+                while(!chessMatch.Finished)
+                {
+                    Console.Clear();
+                    Screen.PrintBoard(chessMatch.Board);
+                    Console.WriteLine();
+                    Console.Write("Origem: ");
+                    Position origin = Screen.ReadChessPosition().ToPosition();
+                    Console.Write("Destino: ");
+                    Position destination = Screen.ReadChessPosition().ToPosition();
+                    chessMatch.DoMovement(origin, destination);
+
+                }
+
+            } catch { }
         }
     }
 }

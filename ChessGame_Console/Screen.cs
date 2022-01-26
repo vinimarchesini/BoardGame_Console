@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Board;
 using Board.Enums;
+using Chess;
 
 namespace ChessGame_Console
 {
@@ -25,7 +26,7 @@ namespace ChessGame_Console
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("  a  b  c  d  e  f  g  h");
+            Console.WriteLine("  a b c d e f g h");
         }
 
         public static void PrintPiece(Piece piece)
@@ -40,6 +41,14 @@ namespace ChessGame_Console
             Console.Write(piece);
             Console.ForegroundColor = aux;
             }
+        }
+
+        public static ChessPosition ReadChessPosition()
+        {
+            string s = Console.ReadLine();
+            char collum = s[0];
+            int line = int.Parse(s[1] + "");
+            return new ChessPosition(collum, line);
         }
     }
 }

@@ -32,6 +32,19 @@ namespace Board
             pieces[pos.Line, pos.Collum] = piece;
             piece.Position = pos;
         }
+
+        public Piece WithDrawPiece(Position pos)
+        {
+            if (Piece(pos) == null)
+            {
+                return null;
+            }
+            Piece aux = Piece(pos);
+            aux.Position = null;
+            pieces[pos.Line, pos.Collum] = null;
+            return aux;
+
+        }
         public Piece Piece(int line, int collum)
         {
             return pieces[line, collum];

@@ -19,5 +19,10 @@ namespace Board
             QttMoves = 0;
             Board = board;
         }
+
+        public void IncrementQttMoves()
+        {
+            QttMoves++;
+        }
     }
 }
