@@ -13,9 +13,10 @@ namespace ChessGame_Console
             Console.WriteLine(cp);
             Console.WriteLine(cp.ToPosition());
 
-            //Board.Board b = new Board.Board(8, 8);
-            //b.InputPiece(new King(b, Enum.Parse<Color>("White")), new Position(0, 0));
-            //Screen.PrintBoard(b);
+            Board.Board b = new Board.Board(8, 8);
+            b.InputPiece(new King(b, Enum.Parse<Color>("White")), new Position(0, 0));
+            b.InputPiece(new Rook(b, Color.Black), new Position(3, 5));
+            Screen.PrintBoard(b);
         }
     }
 }
