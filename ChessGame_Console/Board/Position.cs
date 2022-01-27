@@ -15,6 +15,12 @@ namespace Board
             Collum = collum;
         }
 
+        public void DefineValues(int line, int collum)
+        {
+            Line = line;
+            Collum = collum;
+        }
+
         public override string ToString()
         {
             return $"{Line}, {Collum}";
