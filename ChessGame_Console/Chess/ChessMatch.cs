@@ -31,15 +31,13 @@ namespace Chess
             Piece capturedPiece = Board.WithDrawPiece(destination);
             Board.InputPiece(p, destination);
             }
-            else 
-            {
-                Console.WriteLine($"The piece {aux} can not do this move!");
-            }
         }
 
         private void InputPieces()
         {
             Board.InputPiece(new King(Board, Color.White), new ChessPosition('c', 1).ToPosition());
+            Board.InputPiece(new Rook(Board, Color.White), new ChessPosition('d', 1).ToPosition());
+            Board.InputPiece(new King(Board, Color.White), new ChessPosition('d', 6).ToPosition());
         }
     }
 }
