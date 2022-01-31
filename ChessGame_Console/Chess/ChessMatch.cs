@@ -23,15 +23,23 @@ namespace Chess
 
         public void DoMovement(Position origin, Position destination)
         {
+            Piece aux = Board.Piece(origin);
+            if (aux.PossibleMovements()[destination.Line, destination.Collum])
+            { 
             Piece p = Board.WithDrawPiece(origin);
             p.IncrementQttMoves();
             Piece capturedPiece = Board.WithDrawPiece(destination);
             Board.InputPiece(p, destination);
+            }
+            else 
+            {
+                Console.WriteLine($"The piece {aux} can not do this move!");
+            }
         }
 
         private void InputPieces()
         {
-            Board.InputPiece(new Rook(Board, Color.White), new ChessPosition('c', 1).ToPosition());
+            Board.InputPiece(new King(Board, Color.White), new ChessPosition('c', 1).ToPosition());
         }
     }
 }

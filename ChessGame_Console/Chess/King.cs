@@ -82,6 +82,7 @@ namespace Chess
             {
                 mat[pos.Line, pos.Collum] = true;
             }
+
             return mat;
         }
     }
