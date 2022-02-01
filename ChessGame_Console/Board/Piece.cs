@@ -25,6 +25,26 @@ namespace Board
             QttMoves++;
         }
 
+        public bool ExistPossibleMovements()
+        {
+            bool[,] mat = PossibleMovements();
+            for (int i = 0; i < Board.Lines; i++)
+            {
+                for (int j = 0; j < Board.Collums; j++)
+                {
+                    if (mat[i, j] == true)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool CanMoveTo(Position pos)
+        {
+            return PossibleMovements()[pos.Line, pos.Collum];
+        }
         public abstract bool[,] PossibleMovements();
 
     }

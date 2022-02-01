@@ -7,39 +7,37 @@ namespace ChessGame_Console
 {
     class Program
     {
-        public static string Message { get; set; }
         static void Main(string[] args)
         {
-            try
-            {
-                ChessMatch chessMatch = new ChessMatch();
+            ChessMatch chessMatch = new ChessMatch();
 
-                while (!chessMatch.Finished)
+            while (!chessMatch.Finished)
+            {
+                try
                 {
                     Console.Clear();
-                    Screen.PrintBoard(chessMatch.Board);
-                    Console.WriteLine();
-                    if (!(Message is null))
-                    {
-                        Console.WriteLine("Wrong Move!!");
-                    }
+                    Screen.PrintMatch(chessMatch);
                     Console.Write("Origem: ");
                     Position origin = Screen.ReadChessPosition().ToPosition();
+                    chessMatch.ValidateOriginPosition(origin);
+                    bool[,] possiblePositions = chessMatch.Board.Piece(origin).PossibleMovements();
+                    Console.Clear();
+                    Screen.PrintBoard(chessMatch.Board, possiblePositions);
+                    Console.WriteLine();
                     Console.Write("Destino: ");
                     Position destination = Screen.ReadChessPosition().ToPosition();
-                    if (chessMatch.Board.ValidPosition(origin) && chessMatch.Board.ValidPosition(destination))
-                    {
-                        chessMatch.DoMovement(origin, destination);
-                        Message = null;
-                    }
-                    else
-                    {
-                        Message = "Wrong Move!!";
-                    }
+                    chessMatch.ValidateDestinationPosition(origin, destination);
+                    chessMatch.MakeMove(origin, destination);
                 }
-
+                catch (BoardException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.ReadLine();
+                }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+
+
+
         }
     }
 }
