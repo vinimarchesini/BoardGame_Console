@@ -30,11 +30,19 @@ namespace ChessGame_Console
             PrintCapturedPieces(chessMatch);
             Console.WriteLine();
             Console.WriteLine($"Turn: {chessMatch.Turn}");
-            Console.WriteLine($"it's the {chessMatch.ActualPlayer} player's turn");
-            Console.WriteLine();
-            if (chessMatch.Xeque)
-            { 
-                Console.WriteLine("XEQUE!"); 
+            if (!chessMatch.Finished)
+            {
+                Console.WriteLine($"it's the {chessMatch.ActualPlayer} player's turn");
+                Console.WriteLine();
+                if (chessMatch.Xeque)
+                {
+                    Console.WriteLine("XEQUE!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("XEQUEMATE!");
+                Console.WriteLine($"Winner: {chessMatch.ActualPlayer}");
             }
         }
 

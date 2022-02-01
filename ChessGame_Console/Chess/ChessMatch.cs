@@ -90,6 +90,39 @@ namespace Chess
             }
             return false;
         }
+
+        public bool TestXequeMate(Color color)
+        {
+            if (!IsinXeque(color))
+            { 
+                return false; 
+            }   
+            
+            foreach(Piece x in PiecesInGame(color))
+            {
+                bool[,] mat = x.PossibleMovements();
+                for(int i = 0; i < Board.Lines; i++)
+                {
+                    for (int j = 0; j < Board.Collums; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Position origin = x.Position;
+                            Position destination = new Position(i, j);
+                            Piece capturedPiece = DoMovement(origin, destination);
+                            bool testXeque = IsinXeque(color);
+                            UndoMovement(origin, destination, capturedPiece);
+                            if (!testXeque)
+                            {
+                                return false;
+                            }
+
+                        }
+                    }
+                }
+            }
+            return true;
+        }
         public void ChangePlayer()
         {
             if (ActualPlayer == Color.White)
@@ -130,6 +163,11 @@ namespace Chess
             else
             {
                 Xeque = false;
+            }
+
+            if (TestXequeMate(Opponent(ActualPlayer)))
+            {
+                Finished = true;
             }
             Turn++;
             ChangePlayer();
@@ -183,8 +221,9 @@ namespace Chess
         {
             InputNewPieces('c', 1, new King(Board, Color.White));
             InputNewPieces('c', 2, new Rook(Board, Color.White));
-            InputNewPieces('c', 8, new King(Board, Color.Black));
-            InputNewPieces('c', 7, new Rook(Board, Color.Black));
+            InputNewPieces('h', 7, new Rook(Board, Color.White));
+            InputNewPieces('a', 8, new King(Board, Color.Black));
+            InputNewPieces('b', 8, new Rook(Board, Color.Black));
         }
     }
 }

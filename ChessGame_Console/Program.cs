@@ -35,7 +35,8 @@ namespace ChessGame_Console
                     Console.ReadLine();
                 }
             }
-
+            Console.Clear();
+            Screen.PrintMatch(chessMatch);
 
 
         }
