@@ -15,6 +15,8 @@ namespace Chess
         public HashSet<Piece> Pieces { get; private set; }
         public HashSet<Piece> Captureds { get; private set; }
 
+        public bool Xeque { get; private set; }
+
         public ChessMatch()
         {
             Board = new Board.Board(8, 8);
@@ -22,14 +24,8 @@ namespace Chess
             ActualPlayer = Color.White;
             Pieces = new HashSet<Piece>();
             Captureds = new HashSet<Piece>();
+            Xeque = false;
             InputPieces();
-        }
-
-        public void MakeMove(Position origin, Position destination)
-        {
-            DoMovement(origin, destination);
-            Turn++;
-            ChangePlayer();
         }
 
         public void ValidateOriginPosition(Position pos)
@@ -55,6 +51,45 @@ namespace Chess
                 throw new BoardException("Destination Position is invalid!");
             }
         }
+
+        private Color Opponent(Color color)
+        {
+            if (color == Color.White)
+            {
+                return Color.Black;
+            }
+            return Color.White;
+        }
+
+        private Piece King(Color color)
+        {
+            foreach(Piece x in PiecesInGame(color))
+            {
+                if (x is King)
+                {
+                    return x;
+                }
+            }
+            return null;
+        }
+
+        public bool IsinXeque(Color color)
+        {
+            Piece king = King(color);
+            if (king is null)
+            {
+                throw new BoardException("King doesn't exist in Board!");
+            }
+            foreach (Piece x in PiecesInGame(Opponent(color)))
+            {
+                bool[,] mat = x.PossibleMovements();
+                if (mat[king.Position.Line, king.Position.Collum])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public void ChangePlayer()
         {
             if (ActualPlayer == Color.White)
@@ -67,7 +102,7 @@ namespace Chess
             }
         }
 
-        public void DoMovement(Position origin, Position destination)
+        public Piece DoMovement(Position origin, Position destination)
         {
             Piece p = Board.WithDrawPiece(origin);
             p.IncrementQttMoves();
@@ -76,6 +111,39 @@ namespace Chess
             if (capturedPiece != null)
             {
                 Captureds.Add(capturedPiece);
+            }
+            return capturedPiece;
+        }
+
+        public void MakeMove(Position origin, Position destination)
+        {
+            Piece capturedPiece = DoMovement(origin, destination);
+            if (IsinXeque(ActualPlayer))
+            {
+                UndoMovement(origin, destination, capturedPiece);
+                throw new BoardException("You cannot put yourself in Xeque!");
+            }
+            if (IsinXeque(Opponent(ActualPlayer)))
+            {
+                Xeque = true;
+            }
+            else
+            {
+                Xeque = false;
+            }
+            Turn++;
+            ChangePlayer();
+        }
+
+        public void UndoMovement(Position origin, Position destination, Piece capturedPiece)
+        {
+            Piece p = Board.WithDrawPiece(destination);
+            p.DecrementQttMoves();
+            Board.InputPiece(p, origin);
+            if (capturedPiece != null)
+            {
+                Board.InputPiece(capturedPiece, destination);
+                Captureds.Remove(capturedPiece);
             }
         }
 
@@ -113,8 +181,10 @@ namespace Chess
         }
         private void InputPieces()
         {
-            InputNewPieces('c', 1, new Rook(Board, Color.White));
-            InputNewPieces('c', 8, new Rook(Board, Color.Black));
+            InputNewPieces('c', 1, new King(Board, Color.White));
+            InputNewPieces('c', 2, new Rook(Board, Color.White));
+            InputNewPieces('c', 8, new King(Board, Color.Black));
+            InputNewPieces('c', 7, new Rook(Board, Color.Black));
         }
     }
 }

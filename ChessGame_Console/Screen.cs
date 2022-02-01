@@ -32,6 +32,10 @@ namespace ChessGame_Console
             Console.WriteLine($"Turn: {chessMatch.Turn}");
             Console.WriteLine($"it's the {chessMatch.ActualPlayer} player's turn");
             Console.WriteLine();
+            if (chessMatch.Xeque)
+            { 
+                Console.WriteLine("XEQUE!"); 
+            }
         }
 
         public static void PrintCapturedPieces(ChessMatch chessMatch)
