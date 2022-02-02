@@ -17,15 +17,66 @@ namespace Chess
             return "N";
         }
 
-        private bool CanMove(Position pos)
-        {
-            Piece p = Board.Piece(pos);
-            return p == null || p.Color != this.Color;
-        }
         public override bool[,] PossibleMovements()
         {
             bool[,] mat = new bool[Board.Lines, Board.Collums];
             Position pos = new Position(0, 0);
+
+            //lud1
+            pos.DefineValues(Position.Line - 1, Position.Collum - 2);
+            if (Board.ValidPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Collum] = true;
+            }
+
+            //lud2
+            pos.DefineValues(Position.Line - 2, Position.Collum - 1);
+            if (Board.ValidPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Collum] = true;
+            }
+
+            //rud1
+            pos.DefineValues(Position.Line - 1, Position.Collum + 2);
+            if (Board.ValidPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Collum] = true;
+            }
+
+            //rud2
+            pos.DefineValues(Position.Line - 2, Position.Collum + 1);
+            if (Board.ValidPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Collum] = true;
+            }
+
+            //ldd1
+            pos.DefineValues(Position.Line + 1, Position.Collum - 2);
+            if (Board.ValidPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Collum] = true;
+            }
+
+            //ldd2
+            pos.DefineValues(Position.Line + 2, Position.Collum - 1);
+            if (Board.ValidPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Collum] = true;
+            }
+
+            //rdd1
+            pos.DefineValues(Position.Line + 1, Position.Collum + 2);
+            if (Board.ValidPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Collum] = true;
+            }
+
+            //rdd2
+            pos.DefineValues(Position.Line + 2, Position.Collum + 1);
+            if (Board.ValidPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Collum] = true;
+            }
 
             return mat;
         }

@@ -224,6 +224,11 @@ namespace Chess
             InputNewPieces('h', 7, new Rook(Board, Color.White));
             InputNewPieces('a', 8, new King(Board, Color.Black));
             InputNewPieces('b', 8, new Rook(Board, Color.Black));
+            InputNewPieces('c', 7, new Rook(Board, Color.Black));
+            InputNewPieces('d', 4, new Queen(Board, Color.White));
+            InputNewPieces('f', 4, new Knight(Board, Color.White));
+            InputNewPieces('h', 1, new Pawn(Board, Color.White));
+            InputNewPieces('g', 2, new Knight(Board, Color.Black));
         }
     }
 }
