@@ -1,0 +1,14 @@
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\bin\Debug\netcoreapp3.1\BoardGame_Console.exe
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\bin\Debug\netcoreapp3.1\BoardGame_Console.deps.json
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\bin\Debug\netcoreapp3.1\BoardGame_Console.runtimeconfig.json
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\bin\Debug\netcoreapp3.1\BoardGame_Console.runtimeconfig.dev.json
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\bin\Debug\netcoreapp3.1\BoardGame_Console.dll
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\bin\Debug\netcoreapp3.1\BoardGame_Console.pdb
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\obj\Debug\netcoreapp3.1\BoardGame_Console.csproj.AssemblyReference.cache
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\obj\Debug\netcoreapp3.1\BoardGame_Console.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\obj\Debug\netcoreapp3.1\BoardGame_Console.AssemblyInfoInputs.cache
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\obj\Debug\netcoreapp3.1\BoardGame_Console.AssemblyInfo.cs
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\obj\Debug\netcoreapp3.1\BoardGame_Console.csproj.CoreCompileInputs.cache
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\obj\Debug\netcoreapp3.1\BoardGame_Console.dll
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\obj\Debug\netcoreapp3.1\BoardGame_Console.pdb
+C:\Users\Vinicius\source\repos\BoardGame_Console\BoardGame_Console\obj\Debug\netcoreapp3.1\BoardGame_Console.genruntimeconfig.cache

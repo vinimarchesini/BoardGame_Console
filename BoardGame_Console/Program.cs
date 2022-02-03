@@ -17,14 +17,14 @@ namespace ChessGame_Console
                 {
                     Console.Clear();
                     Screen.PrintMatch(chessMatch);
-                    Console.Write("Origem: ");
+                    Console.Write("Origin: ");
                     Position origin = Screen.ReadChessPosition().ToPosition();
                     chessMatch.ValidateOriginPosition(origin);
                     bool[,] possiblePositions = chessMatch.Board.Piece(origin).PossibleMovements();
                     Console.Clear();
                     Screen.PrintBoard(chessMatch.Board, possiblePositions);
                     Console.WriteLine();
-                    Console.Write("Destino: ");
+                    Console.Write("Destination: ");
                     Position destination = Screen.ReadChessPosition().ToPosition();
                     chessMatch.ValidateDestinationPosition(origin, destination);
                     chessMatch.MakeMove(origin, destination);
