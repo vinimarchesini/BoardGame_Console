@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGame_Console", "BoardGame_Console\BoardGame_Console.csproj", "{4379AD8E-B13B-4D54-9A05-F669CE119C7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGame_Console", "ChessGame_Console\BoardGame_Console.csproj", "{4379AD8E-B13B-4D54-9A05-F669CE119C7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
