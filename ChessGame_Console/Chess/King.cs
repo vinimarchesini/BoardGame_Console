@@ -8,8 +8,15 @@ namespace Chess
 {
     class King : Piece
     {
-        public King(Board.Board board, Color color) : base(color, board)
+        private ChessMatch chessMatch;
+        public King(Board.Board board, Color color, ChessMatch chessMatch) : base(color, board)
         {
+        }
+
+        private bool TestRooktoRoque(Position pos)
+        {
+            Piece p = Board.Piece(pos);
+            return p != null && p is Rook && p.Color == Color && p.QttMoves == 0;
         }
 
         public override string ToString()
@@ -78,6 +85,34 @@ namespace Chess
                 mat[pos.Line, pos.Collum] = true;
             }
 
+            // #Special move: Roque
+            if (QttMoves == 0 && !chessMatch.Xeque)
+            {
+                // #Special move: Little Roque
+                Position posT1 = new Position(Position.Line, Position.Collum + 3);
+                if (TestRooktoRoque(posT1))
+                {
+                    Position p1 = new Position(Position.Line, Position.Collum + 1);
+                    Position p2 = new Position(Position.Line, Position.Collum + 2);
+                    if (Board.Piece(p1) == null && Board.Piece(p2) == null)
+                    {
+                        mat[Position.Line, Position.Collum + 2] = true;
+                    }
+                }
+            }
+            //Special move: Big Roque
+            Position posT2 = new Position(Position.Line, Position.Collum - 4);
+            if (TestRooktoRoque(posT2))
+            {
+                Position p1 = new Position(Position.Line, Position.Collum - 1);
+                Position p2 = new Position(Position.Line, Position.Collum - 2);
+                Position p3 = new Position(Position.Line, Position.Collum - 3);
+                if (Board.Piece(p1) == null && Board.Piece(p2) == null && Board.Piece(p3) == null)
+                {
+                    mat[Position.Line, Position.Collum - 2] = true;
+                }
+
+            }
             return mat;
         }
     }

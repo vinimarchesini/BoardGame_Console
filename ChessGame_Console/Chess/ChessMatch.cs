@@ -14,6 +14,7 @@ namespace Chess
         public bool Finished { get; private set; }
         public HashSet<Piece> Pieces { get; private set; }
         public HashSet<Piece> Captureds { get; private set; }
+        public Piece VulnerableEnPassant { get; private set; }
 
         public bool Xeque { get; private set; }
 
@@ -63,7 +64,7 @@ namespace Chess
 
         private Piece King(Color color)
         {
-            foreach(Piece x in PiecesInGame(color))
+            foreach (Piece x in PiecesInGame(color))
             {
                 if (x is King)
                 {
@@ -94,14 +95,14 @@ namespace Chess
         public bool TestXequeMate(Color color)
         {
             if (!IsinXeque(color))
-            { 
-                return false; 
-            }   
-            
-            foreach(Piece x in PiecesInGame(color))
+            {
+                return false;
+            }
+
+            foreach (Piece x in PiecesInGame(color))
             {
                 bool[,] mat = x.PossibleMovements();
-                for(int i = 0; i < Board.Lines; i++)
+                for (int i = 0; i < Board.Lines; i++)
                 {
                     for (int j = 0; j < Board.Collums; j++)
                     {
@@ -145,6 +146,46 @@ namespace Chess
             {
                 Captureds.Add(capturedPiece);
             }
+
+            // #jogadaespecial roque pequeno
+            if (p is King && destination.Collum == origin.Collum + 2)
+            {
+                Position originT = new Position(origin.Line, origin.Collum + 3);
+                Position destinationT = new Position(origin.Line, origin.Collum + 1);
+                Piece T = Board.WithDrawPiece(originT);
+                T.IncrementQttMoves();
+                Board.InputPiece(T, destinationT);
+            }
+
+            // #jogadaespecial roque grande
+            if (p is King && destination.Collum == origin.Collum - 2)
+            {
+                Position originT = new Position(origin.Line, origin.Collum - 4);
+                Position destinationT = new Position(origin.Line, origin.Collum - 1);
+                Piece T = Board.WithDrawPiece(originT);
+                T.IncrementQttMoves();
+                Board.InputPiece(T, destinationT);
+            }
+
+            // #jogadaespecial en passant
+            if (p is Pawn)
+            {
+                if (origin.Collum != destination.Collum && capturedPiece == null)
+                {
+                    Position posP;
+                    if (p.Color == Color.White)
+                    {
+                        posP = new Position(destination.Line + 1, destination.Collum);
+                    }
+                    else
+                    {
+                        posP = new Position(destination.Line - 1, destination.Collum);
+                    }
+                    capturedPiece = Board.WithDrawPiece(posP);
+                    Captureds.Add(capturedPiece);
+                }
+            }
+
             return capturedPiece;
         }
 
@@ -156,6 +197,21 @@ namespace Chess
                 UndoMovement(origin, destination, capturedPiece);
                 throw new BoardException("You cannot put yourself in Xeque!");
             }
+            Piece p = Board.Piece(destination);
+
+            // #special move promotion
+            if (p is Pawn)
+            {
+                if ((p.Color == Color.White && destination.Line == 0) || (p.Color == Color.Black && destination.Line == 7))
+                {
+                    p = Board.WithDrawPiece(destination);
+                    Pieces.Remove(p);
+                    Piece rook = new Rook(Board, p.Color);
+                    Board.InputPiece(rook, destination);
+                    Pieces.Add(rook);
+                }
+            }
+
             if (IsinXeque(Opponent(ActualPlayer)))
             {
                 Xeque = true;
@@ -171,6 +227,16 @@ namespace Chess
             }
             Turn++;
             ChangePlayer();
+
+            // #special move en passant
+            if (p is Pawn && (destination.Line == origin.Line - 2 || destination.Line == origin.Line + 2))
+            {
+                VulnerableEnPassant = p;
+            }
+            else
+            {
+                VulnerableEnPassant = null;
+            }
         }
 
         public void UndoMovement(Position origin, Position destination, Piece capturedPiece)
@@ -183,14 +249,52 @@ namespace Chess
                 Board.InputPiece(capturedPiece, destination);
                 Captureds.Remove(capturedPiece);
             }
+            // #jogadaespecial roque pequeno
+            if (p is King && destination.Collum == origin.Collum + 2)
+            {
+                Position originT = new Position(origin.Line, origin.Collum + 3);
+                Position destinationT = new Position(origin.Line, origin.Collum + 1);
+                Piece T = Board.WithDrawPiece(destinationT);
+                T.DecrementQttMoves();
+                Board.InputPiece(T, originT);
+            }
+
+            // #jogadaespecial roque grande
+            if (p is King && destination.Collum == origin.Collum - 2)
+            {
+                Position originT = new Position(origin.Line, origin.Collum - 4);
+                Position destinationT = new Position(origin.Line, origin.Collum - 1);
+                Piece T = Board.WithDrawPiece(destinationT);
+                T.DecrementQttMoves();
+                Board.InputPiece(T, originT);
+            }
+
+            // #jogadaespecial en passant
+            if (p is Pawn)
+            {
+                if (origin.Collum != destination.Collum && capturedPiece == VulnerableEnPassant)
+                {
+                    Piece peao = Board.WithDrawPiece(destination);
+                    Position posP;
+                    if (p.Color == Color.White)
+                    {
+                        posP = new Position(3, destination.Collum);
+                    }
+                    else
+                    {
+                        posP = new Position(4, destination.Collum);
+                    }
+                    Board.InputPiece(peao, posP);
+                }
+            }
         }
 
         public HashSet<Piece> CapturedPieces(Color color)
         {
             HashSet<Piece> aux = new HashSet<Piece>();
-            foreach(Piece x in Captureds)
+            foreach (Piece x in Captureds)
             {
-                if(x.Color == color)
+                if (x.Color == color)
                 {
                     aux.Add(x);
                 }
@@ -223,7 +327,7 @@ namespace Chess
             InputNewPieces('b', 1, new Knight(Board, Color.White));
             InputNewPieces('c', 1, new Bishop(Board, Color.White));
             InputNewPieces('d', 1, new Queen(Board, Color.White));
-            InputNewPieces('e', 1, new King(Board, Color.White));
+            InputNewPieces('e', 1, new King(Board, Color.White, this));
             InputNewPieces('f', 1, new Bishop(Board, Color.White));
             InputNewPieces('g', 1, new Knight(Board, Color.White));
             InputNewPieces('h', 1, new Rook(Board, Color.White));
@@ -240,7 +344,7 @@ namespace Chess
             InputNewPieces('b', 8, new Knight(Board, Color.Black));
             InputNewPieces('c', 8, new Bishop(Board, Color.Black));
             InputNewPieces('d', 8, new Queen(Board, Color.Black));
-            InputNewPieces('e', 8, new King(Board, Color.Black));
+            InputNewPieces('e', 8, new King(Board, Color.Black, this));
             InputNewPieces('f', 8, new Bishop(Board, Color.Black));
             InputNewPieces('g', 8, new Knight(Board, Color.Black));
             InputNewPieces('h', 8, new Rook(Board, Color.Black));
