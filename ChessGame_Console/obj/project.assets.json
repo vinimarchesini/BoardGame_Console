@@ -15,9 +15,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vinicius\\source\\repos\\ChessGame_Console\\ChessGame_Console\\ChessGame_Console.csproj",
-      "projectName": "ChessGame_Console",
-      "projectPath": "C:\\Users\\Vinicius\\source\\repos\\ChessGame_Console\\ChessGame_Console\\ChessGame_Console.csproj",
+      "projectUniqueName": "C:\\Users\\Vinicius\\source\\repos\\ChessGame_Console\\ChessGame_Console\\BoardGame_Console.csproj",
+      "projectName": "BoardGame_Console",
+      "projectPath": "C:\\Users\\Vinicius\\source\\repos\\ChessGame_Console\\ChessGame_Console\\BoardGame_Console.csproj",
       "packagesPath": "C:\\Users\\Vinicius\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Vinicius\\source\\repos\\ChessGame_Console\\ChessGame_Console\\obj\\",
       "projectStyle": "PackageReference",
